@@ -10,9 +10,6 @@ def main():
     # Preprocess the data
     preprocessed_data = dp.preprocess_data(data)
 
-    # Visualize the data
-    dp.visualize_data(data)  # Call the function from the data_visualization module
-
     # Visualize the proccessed data
     # dv.plot_categorical_data(preprocessed_data)
     dv.plot_correlation_heatmap(preprocessed_data)
