@@ -13,10 +13,13 @@ def load_data(file_path):
 
 def preprocess_data(data):
     """ Preprocess the dataset: drop unnecessary columns, handle missing values, encode categorical variables. """
+    obj = (data.dtypes == 'object')
+    print("Categorical variables:",len(list(obj[obj].index))) # Count variables (Categorical variables)
+
     # Dropping Loan_ID column
     data = data.drop(['Loan_ID'], axis=1)
-
-    # # Encoding categorical variables
+    visualize_localData(data)
+    ## Encoding categorical variables
     label_encoder = preprocessing.LabelEncoder()
     categorical_columns = data.select_dtypes(include=['object']).columns
     for col in categorical_columns:
@@ -27,6 +30,21 @@ def preprocess_data(data):
         data[col] = data[col].fillna(data[col].mean())
 
     return data
+
+def visualize_localData(data):
+    obj = (data.dtypes == 'object')
+    object_cols = list(obj[obj].index)
+    plt.figure(figsize=(18,36))
+    index = 1
+
+    for col in object_cols:
+        y = data[col].value_counts()
+        plt.subplot(11,4,index)
+        plt.xticks(rotation=90)
+        sns.barplot(x=list(y.index), y=y)
+        index +=1
+
+    plt.show();
 
 def visualize_data(data):
     """ Plot bar charts for each categorical variable in the dataset showing the distribution of unique values. """
