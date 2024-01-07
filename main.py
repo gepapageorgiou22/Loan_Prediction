@@ -24,7 +24,10 @@ def main():
     trained_models = mt.train_models(models, X_train, Y_train)
 
     # Evaluate models
+    print("################ Evaluating Models ################")
+    print("################ Evaluating Train Model ################")
     me.evaluate_models(trained_models, X_train, Y_train, 'train')
+    print("################ Evaluating Test Model ################")
     me.evaluate_models(trained_models, X_test, Y_test, 'test')
 
 if __name__ == "__main__":
